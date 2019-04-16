@@ -2,7 +2,11 @@
 <div>
   <div class="image" v-for="photo in photos" v-bind:key="photo._id">
     <!-- <img @click="singlePhoto" :src="photo.path" /> -->
-    <router-link :to="{ name: 'photo', params: { id: photo._id }}"><img :src="photo.path" /></router-link>
+
+    <div class="cp_embed_wrapper"><iframe name="cp_embed_2" :src="photo.path" scrolling="no" frameborder="0" height="565" allowtransparency="true" allowfullscreen="true" allowpaymentrequest="true" title="Click and draw some flowers" class="cp_embed_iframe "
+        style="width: 100%; overflow:hidden; display:block;" id="cp_embed_apwMwM"></iframe></div>
+
+    <!-- <router-link :to="{ name: 'photo', params: { id: photo._id }}"><img :src="photo.path" /></router-link> -->
     <p class="photoTitle">{{photo.title}}</p>
     <p class="photoDate">
       <span v-if="photo.user.name">{{photo.user.name}}, </span>
@@ -21,6 +25,7 @@ export default {
   props: {
     photos: Array
   },
+
   methods: {
     formatDate(date) {
       if (moment(date).diff(Date.now(), 'days') < 15)

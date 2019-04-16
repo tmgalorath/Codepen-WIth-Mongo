@@ -50,16 +50,16 @@ const commentSchema = new mongoose.Schema({
 
 const Comment = mongoose.model('Comment', commentSchema);
 // upload photo
-router.post("/", auth.verifyToken, User.verify, upload.single('photo'), async (req, res) => {
+router.post("/", auth.verifyToken, User.verify, async (req, res) => {
   // check parameters
-  if (!req.file)
-    return res.status(400).send({
-      message: "Must upload a file."
-    });
+  // if (!req.file)
+  //   return res.status(400).send({
+  //     message: "Must upload a file."
+  //   });
 
   const photo = new Photo({
     user: req.user,
-    path: "/images/" + req.file.filename,
+    path: req.body.path,
     title: req.body.title,
     description: req.body.description,
   });

@@ -13,7 +13,7 @@
             <p></p>
             <textarea v-model="description" placeholder="Description"></textarea>
             <p></p>
-            <input type="file" name="photo" @change="fileChanged">
+            <input placeholder="CodepenID" v-model="pen">
             <p></p>
             <button type="button" @click="close" class="pure-button">Close</button>
             <button type="submit" class="pure-button pure-button-secondary">Upload</button>
@@ -35,29 +35,32 @@ export default {
     return {
       title: '',
       description: '',
-      file: null,
+      pen: '',
       error: '',
     }
   },
 
   methods: {
-    fileChanged(event) {
-      this.file = event.target.files[0]
-    },
     close() {
       this.$emit('escape');
     },
     async upload() {
       try {
-        const formData = new FormData();
-        formData.append('photo', this.file, this.file.name);
-        formData.append('title', this.title);
-        formData.append('description', this.description);
-        this.error = await this.$store.dispatch("upload", formData);
+        // const formData = new FormData();
+        // formData.append('photo', this.file, this.file.name);
+        // formData.append('title', this.title);
+        // formData.append('description', this.description);
+        var first = "https://codepen.io/giaco/embed/"
+        var half = "?height=765&amp;theme-id=0&amp;default-tab=js%2Cresult&amp;user=giaco&amp;slug-hash=apwMwM&amp;pen-title=Click%20and%20draw%20some%20flowers&amp;name=cp_embed_2"
+        console.log(first + this.pen + half)
+        let penURL =  first + this.pen + half
+
+        let data = {title : this.title, description : this.description, path : penURL}
+        this.error = await this.$store.dispatch("upload", data);
         if (!this.error) {
           this.title = '';
           this.description = '';
-          this.file = null;
+          this.pen = '';
           this.$emit('uploadFinished');
         }
       } catch (error) {
