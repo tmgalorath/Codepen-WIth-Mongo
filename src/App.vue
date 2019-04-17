@@ -21,8 +21,10 @@
   <div class="content">
     <router-view />
   </div>
+  <div id="footer" style="position:fixed;top:calc(100vh - 40px);right:0px;width:100%;text-align:center;"><a href="<strong>https://github.com/tmgalorath/Codepen-WIth-Mongo</strong>">GitHub</a></div>
 </v-app>
 </div>
+
 </template>
 
 <style>
