@@ -13,6 +13,14 @@
       {{formatDate(photo.created)}}
     </p>
     <p>{{photo.description}}</p>
+
+    <div v-if="canDelete">
+      <v-btn flat icon color="red lighten-2">
+        <v-icon color="error" @click="deletePen(photo)" large>delete</v-icon>
+      </v-btn>
+    </div>
+
+
   </div>
 </div>
 </template>
@@ -23,7 +31,9 @@ import moment from 'moment';
 export default {
   name: 'ImageGallery',
   props: {
-    photos: Array
+    photos: Array,
+    canDelete: Boolean,
+
   },
 
   methods: {
@@ -33,6 +43,13 @@ export default {
       else
         return moment(date).format('d MMMM YYYY');
     },
+
+    async deletePen(photo) {
+      console.log(photo)
+      await this.$store.dispatch("deleteOne", photo._id)
+      await this.$store.dispatch("getMyPhotos");
+      // await this.$store.dispatch("getAllPhotos");
+    }
   },
 }
 </script>

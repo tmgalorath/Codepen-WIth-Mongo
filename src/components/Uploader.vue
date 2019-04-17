@@ -1,22 +1,25 @@
 <template>
+
 <transition v-if="show" name="modal">
   <div class="modal-mask">
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
-          <h1 class="modal-title">Upload</h1>
+          <h1 class="modal-title">Upload CodePen to Shared Repository</h1>
+          <h1 class="modal-title">Go to <a href= "https://codepen.io/">codepen.io</a> to find the 6 character ID of pens you would like to add! This Id is at then end of each URL</h1>
         </div>
         <div class="modal-body">
           <p v-if="error" class="error">{{error}}</p>
           <form @submit.prevent="upload">
-            <input v-model="title" placeholder="Title">
+            <v-text-field v-model="title" label="Title"></v-text-field>
+            <v-text-field v-model="pen" label="CodepenID" ></v-text-field>
             <p></p>
-            <textarea v-model="description" placeholder="Description"></textarea>
+            <v-textarea v-model="description" placeholder="Description"></v-textarea>
             <p></p>
-            <input placeholder="CodepenID" v-model="pen">
+
             <p></p>
-            <button type="button" @click="close" class="pure-button">Close</button>
-            <button type="submit" class="pure-button pure-button-secondary">Upload</button>
+            <v-btn  color="error" @click="close" class="pure-button">Close</v-btn>
+            <v-btn color="success" type="submit" class="pure-button pure-button-secondary">Upload</v-btn>
           </form>
         </div>
       </div>
@@ -46,16 +49,17 @@ export default {
     },
     async upload() {
       try {
-        // const formData = new FormData();
-        // formData.append('photo', this.file, this.file.name);
-        // formData.append('title', this.title);
-        // formData.append('description', this.description);
+
         var first = "https://codepen.io/giaco/embed/"
         var half = "?height=765&amp;theme-id=0&amp;default-tab=js%2Cresult&amp;user=giaco&amp;slug-hash=apwMwM&amp;pen-title=Click%20and%20draw%20some%20flowers&amp;name=cp_embed_2"
         console.log(first + this.pen + half)
-        let penURL =  first + this.pen + half
+        let penURL = first + this.pen + half
 
-        let data = {title : this.title, description : this.description, path : penURL}
+        let data = {
+          title: this.title,
+          description: this.description,
+          path: penURL
+        }
         this.error = await this.$store.dispatch("upload", data);
         if (!this.error) {
           this.title = '';

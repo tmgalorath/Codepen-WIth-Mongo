@@ -72,6 +72,20 @@ router.post("/", auth.verifyToken, User.verify, async (req, res) => {
   }
 });
 
+router.delete("/:id", auth.verifyToken, User.verify, async (req, res) => {
+  try {
+    await Photo.deleteOne({
+      _id: req.params.id
+    });
+    res.sendStatus(200)
+  } catch (e) {
+    console.log(error);
+    res.sendStatus(500);
+
+  }
+
+});
+
 
 // get my photos
 router.get("/", auth.verifyToken, User.verify, async (req, res) => {

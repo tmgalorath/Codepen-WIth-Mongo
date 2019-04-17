@@ -1,25 +1,33 @@
 <template>
 <div id="app">
-  <div class="pure-menu">
-    <span class="pure-menu-heading">Photo Bomb</span>
-    <ul class="pure-menu-list">
-      <li class="pure-menu-item">
-        <router-link to="/" class="pure-menu-link">Home</router-link>
-      </li>
-      <li class="pure-menu-item">
-        <router-link to="/mypage" class="pure-menu-link">My Page</router-link>
-      </li>
-    </ul>
-  </div>
+  <v-app>
+  <v-toolbar fixed dark >
+    <v-toolbar-side-icon></v-toolbar-side-icon>
+
+    <v-toolbar-title class="white--text">CodePen Database</v-toolbar-title>
+
+    <v-spacer></v-spacer>
+    <v-toolbar-items class="hidden-sm-and-down">
+
+      <v-btn to="/mypage">Personal Pens</v-btn>
+      <v-btn to="/">Global Repository</v-btn>
+
+    </v-toolbar-items>
+
+
+
+  </v-toolbar>
+
   <div class="content">
     <router-view />
   </div>
+</v-app>
 </div>
 </template>
 
 <style>
 /* https://color.adobe.com/Ventana-Azul-color-theme-2159606/?showPublished=true */
-#app {
+/* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,41 +35,10 @@
   font-size: 18px;
   display: flex;
   min-height: 100%;
-}
-
-.pure-menu {
-  /* To limit the menu width to the content of the menu: */
-  /* display: inline-block; */
-  /* Or set the width explicitly: */
-  text-align: left;
-  background: #000;
-}
-
-.pure-menu-heading {
-  color: #fff;
-  font-size: 1.2em;
-  padding: 20px 20px;
-  background-color: #F2385A;
-  margin-bottom: 10px;
-}
-
-.pure-menu-link {
-  color: #fff;
-  padding: 10px 20px;
-  font-weight: 800;
-}
-
-.pure-menu-link:hover {
-  background: #333;
-}
-
-.pure-menu-link.router-link-exact-active {
-  background: #fff;
-  color: #F2385A;
-}
+} */
 
 .content {
-  margin: 50px 100px;
+  margin: 50px 300px;
 }
 
 html {
@@ -80,13 +57,13 @@ body {
   /* https://css-tricks.com/box-sizing/ */
 }
 
+
+
 .error {
   color: #F2385A;
 }
 
-.pure-button-primary {
-  background-color: #36B1BF;
-}
+
 
 /* Modals */
 .modal-mask {

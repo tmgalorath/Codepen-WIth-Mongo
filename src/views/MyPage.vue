@@ -1,27 +1,49 @@
 <template>
 <div>
+  <!-- <br>
+  <br>
+  <br>
+  <br>
+  <br> -->
 
-  <div v-if="user">
-    <div class="header">
-      <div>
-        <h1>{{user.name}}</h1>
-        <escape-event @escape="escape"></escape-event>
-        <uploader :show="show" @escape="escape" @uploadFinished="uploadFinished" />
-        <image-gallery :photos="photos" />
+
+  <div class="text-xs-center">
+    <div v-if="user">
+      <div class="header">
+        <div>
+          <h1>Welcome {{user.name}}</h1>
+
+          <v-btn @click="toggleUpload" :loading="loading3" :disabled="loading3" color="blue-grey" class="white--text" >
+            Upload
+            <v-icon right dark>cloud_upload</v-icon>
+          </v-btn>
+
+          <escape-event @escape="escape"></escape-event>
+          <uploader :show="show" @escape="escape" @uploadFinished="uploadFinished" />
+          <image-gallery :photos="photos" :canDelete="canDelete" />
+        </div>
+        <div>
+          <p>
+
+
+            <a href="#" @click="logout"><i class="fas fa-sign-out-alt"></i></a>
+          </p>
+        </div>
       </div>
-      <div>
-        <p>
-          <a @click="toggleUpload"><i class="far fa-image"></i></a>
-          <a href="#" @click="logout"><i class="fas fa-sign-out-alt"></i></a>
-        </p>
-      </div>
+      <uploader :show="show" @escape="escape" @uploadFinished="uploadFinished" />
     </div>
-    <uploader :show="show" @escape="escape" @uploadFinished="uploadFinished" />
-  </div>
-  <div v-else>
-    <p>If you would like to upload CodePens, please register for an account or login.</p>
-    <router-link to="/register" class="pure-button">Register</router-link> or
-    <router-link to="/login" class="pure-button">Login</router-link>
+    <div v-else>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="text-xs-center">
+      <p>If you would like to upload CodePens, please register for an account or login.</p>
+
+      <v-btn to="/register" dark color="green">Register</v-btn> or
+      <v-btn to="/login" dark color="blue">Login</v-btn>
+    </div>
+    </div>
   </div>
 </div>
 </template>
@@ -40,6 +62,8 @@ export default {
   },
   data() {
     return {
+      canDelete: true,
+      loading3: false,
       show: false,
     }
   },
@@ -81,18 +105,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.header {
-  display: flex;
-}
-
-.header a {
-  padding-left: 50px;
-  color: #222;
-  font-size: 2em;
-}
-
-.header svg {
-  margin-top: 12px;
-}
-</style>

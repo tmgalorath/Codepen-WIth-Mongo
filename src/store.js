@@ -118,5 +118,16 @@ export default new Vuex.Store({
       }
     },
 
+    async deleteOne(context, id){
+      try {
+        let response = await axios.delete("/api/photos/" + id);
+        return "";
+      } catch (e) {
+        console.log(e)
+        return "";
+      }
+
+    }
+
   }
 })
